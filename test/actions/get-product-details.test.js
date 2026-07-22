@@ -1,42 +1,46 @@
-const handler = require('../../actions/get-product-details/index.js');
+const handler = require('../../actions/get-product-details/index.js')
 
 describe('get_product_details handler', () => {
-    test('content is an array of text blocks', async () => {
-        const out = await handler({ product_code: 'B75806' });
-        expect(Array.isArray(out.content)).toBe(true);
-        expect(out.content[0]).toMatchObject({ type: 'text', text: expect.any(String) });
-    });
+    test('content is an array of text blocks on happy path', async () => {
+        const out = await handler({ name: "Nike Solo Fleece Men's Pullover Hoodie" })
+        expect(out).toHaveProperty('content')
+        expect(Array.isArray(out.content)).toBe(true)
+        expect(out.content[0]).toMatchObject({ type: 'text', text: expect.any(String) })
+    })
 
-    test('happy path — looks up by product_code', async () => {
-        const out = await handler({ product_code: 'B75806' });
-        expect(out.content[0].text.length).toBeGreaterThan(0);
-        expect(out.structuredContent).toBeDefined();
-        expect(out.structuredContent.name).toBe('Ultraboost Light Running Shoes');
-    });
+    test('"Tell me more about the Nike Solo Fleece Men\'s Pullover Hoodie" returns product details', async () => {
+        const out = await handler({ name: "Nike Solo Fleece Men's Pullover Hoodie" })
+        expect(out.content[0].text.length).toBeGreaterThan(0)
+        expect(out.content[0].text).toMatch(/Nike Solo Fleece Men's Pullover Hoodie/)
+        expect(out.structuredContent).toBeDefined()
+        expect(out.structuredContent.name).toBe("Nike Solo Fleece Men's Pullover Hoodie")
+        expect(out.structuredContent.price).toBe('$115')
+        expect(out.structuredContent.category).toBe('Hoodies & Sweatshirts')
+    })
 
-    test('looks up by product_name (partial match)', async () => {
-        const out = await handler({ product_name: 'Gazelle' });
-        expect(out.structuredContent.name).toBe('Gazelle Shoes');
-        expect(out.structuredContent.category).toBe('Originals');
-    });
+    test('structuredContent is a plain object, not a bare array', async () => {
+        const out = await handler({ name: "Nike Solo Fleece Men's Pullover Hoodie" })
+        expect(typeof out.structuredContent).toBe('object')
+        expect(Array.isArray(out.structuredContent)).toBe(false)
+    })
 
-    test('structuredContent is a flat plain object, not a bare array', async () => {
-        const out = await handler({ product_code: 'B75806' });
-        expect(typeof out.structuredContent).toBe('object');
-        expect(Array.isArray(out.structuredContent)).toBe(false);
-        expect(out.structuredContent).toHaveProperty('price');
-        expect(out.structuredContent).not.toHaveProperty('product');
-    });
+    test('matches by partial (case-insensitive) name', async () => {
+        const out = await handler({ name: "solo swoosh men's fleece quarter-zip" })
+        expect(out.structuredContent).toBeDefined()
+        expect(out.structuredContent.name).toBe("Nike Solo Swoosh Men's Fleece Quarter-Zip Top")
+    })
 
-    test('returns error message when no identifier is provided', async () => {
-        const out = await handler({});
-        expect(out.content[0].text).toMatch(/product_code|product_name|provide/i);
-        expect(out.structuredContent).toBeUndefined();
-    });
+    test('returns error message when required arg is missing', async () => {
+        const out = await handler({})
+        expect(Array.isArray(out.content)).toBe(true)
+        expect(out.content[0].text).toMatch(/name|provide/i)
+        expect(out.structuredContent).toBeUndefined()
+    })
 
-    test('unknown product — not found, no structuredContent', async () => {
-        const out = await handler({ product_code: 'ZZZ999' });
-        expect(out.content[0].text).toMatch(/no product found/i);
-        expect(out.structuredContent).toBeUndefined();
-    });
-});
+    test('unknown product name returns not-found and no structuredContent', async () => {
+        const out = await handler({ name: 'Adidas Running Shoe' })
+        expect(Array.isArray(out.content)).toBe(true)
+        expect(out.content[0].text).toMatch(/no product details found|not found/i)
+        expect(out.structuredContent).toBeUndefined()
+    })
+})

@@ -1,61 +1,85 @@
-// synthetic fixture — no sample data available from Action Planner
+// TODO: Replace MOCK_DATA with a real API call.
+// See the TODO block below the handler for endpoint details.
 const MOCK_DATA = [
     {
-        product_code: 'B75806',
-        name: 'Ultraboost Light Running Shoes',
-        description: 'Experience epic energy with the new Ultraboost Light, our lightest Ultraboost ever. The magic lies in the Light BOOST midsole, a new generation of adidas BOOST.',
-        price: 'A$280.00',
-        category: 'Running',
-        sizes: ['US 7', 'US 8', 'US 9', 'US 10', 'US 11'],
-        colors: ['Core Black', 'Cloud White', 'Solar Red'],
-        image_url: 'https://assets.adidas.com/images/ultraboost-light.jpg'
+        name: "Nike Solo Fleece Men's Pullover Hoodie",
+        description: "Men's fleece pullover hoodie for everyday warmth.",
+        image_url: 'https://static.nike.com/a/images/q_auto:eco/t_product_v1/f_auto/dpr_1.0/h_599,c_limit/u_9ddf04c7-2a9a-4d76-add1-d15af8f0263d,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/eacfc8ef-8c8f-4a10-82d6-c4d352c1525e/M+NK+SOLO+BB+PO+HD.png',
+        price: '$115',
+        category: 'Hoodies & Sweatshirts'
     },
     {
-        product_code: 'GX3494',
-        name: 'Gazelle Shoes',
-        description: 'A timeless icon reborn. These adidas Gazelle shoes keep the low-profile silhouette and soft suede upper that made the original a street-style staple.',
-        price: 'A$150.00',
-        category: 'Originals',
-        sizes: ['US 6', 'US 7', 'US 8', 'US 9', 'US 10'],
-        colors: ['Collegiate Green', 'Scarlet', 'Navy'],
-        image_url: 'https://assets.adidas.com/images/gazelle.jpg'
+        name: "Nike Solo Fleece Men's Cuffed Trousers",
+        description: "Men's cuffed fleece trousers with a relaxed fit.",
+        image_url: 'https://static.nike.com/a/images/q_auto:eco/t_product_v1/f_auto/dpr_1.0/h_599,c_limit/u_9ddf04c7-2a9a-4d76-add1-d15af8f0263d,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/c10c5891-cb8b-4634-b4b2-854befda3121/M+NK+SOLO+BB+CUFF+PANT.png',
+        price: '$110',
+        category: 'Pants'
     },
     {
-        product_code: 'HP7401',
-        name: 'Tiro 23 Training Pants',
-        description: 'Built for the grind, these adidas Tiro 23 training pants feature moisture-absorbing AEROREADY and a tapered fit that moves with you through every session.',
-        price: 'A$75.00',
-        category: 'Training',
-        sizes: ['XS', 'S', 'M', 'L', 'XL'],
-        colors: ['Black', 'Team Navy Blue'],
-        image_url: 'https://assets.adidas.com/images/tiro-23-pants.jpg'
+        name: "Nike Pre-Game Fleece Women's Oversized Hoodie",
+        description: "Women's oversized fleece hoodie for laid-back layering.",
+        image_url: 'https://static.nike.com/a/images/q_auto:eco/t_product_v1/f_auto/dpr_1.0/h_599,c_limit/u_9ddf04c7-2a9a-4d76-add1-d15af8f0263d,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/5569961d-3a1b-4d2c-bc2e-11e2348b9a85/W+NSW+ARTICLE+FLC+HDY+2.png',
+        price: '$170',
+        category: 'Hoodies & Sweatshirts'
+    },
+    {
+        name: "Nike Pre-Game Fleece Women's Loose Mid-Rise Trousers",
+        description: "Women's loose mid-rise fleece trousers.",
+        image_url: 'https://static.nike.com/a/images/q_auto:eco/t_product_v1/f_auto/dpr_1.0/h_599,c_limit/u_9ddf04c7-2a9a-4d76-add1-d15af8f0263d,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/b1d7174d-633b-474c-9558-810c83e73b24/W+NSW+ARTICLE+FLC+TROUSER.png',
+        price: '$170',
+        category: 'Pants'
+    },
+    {
+        name: "Nike Solo Swoosh Men's Fleece Quarter-Zip Top",
+        description: "Men's fleece quarter-zip top with Solo Swoosh branding.",
+        image_url: 'https://static.nike.com/a/images/q_auto:eco/t_product_v1/f_auto/dpr_1.0/h_599,c_limit/u_9ddf04c7-2a9a-4d76-add1-d15af8f0263d,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/63e6bcd5-4131-451a-bc17-8dda2d7fc52d/M+NL+SOLO+SWSH+BB+QUARTER+ZIP.png',
+        price: '$130',
+        category: 'Hoodies & Sweatshirts'
+    },
+    {
+        name: "Nike Solo Swoosh Men's Cuffed Fleece Trousers",
+        description: "Men's cuffed fleece trousers with Solo Swoosh detailing.",
+        image_url: 'https://static.nike.com/a/images/q_auto:eco/t_product_v1/f_auto/dpr_1.0/h_599,c_limit/u_9ddf04c7-2a9a-4d76-add1-d15af8f0263d,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/b6448c13-813b-4bad-9348-7fd872b769e1/M+NL+SOLO+SWSH+BB+CF+PANT.png',
+        price: '$130',
+        category: 'Pants'
+    },
+    {
+        name: "Nike Sportswear Tech Fleece Older Kids' Full-Zip Hoodie",
+        description: "Older kids' full-zip Tech Fleece hoodie.",
+        image_url: 'https://static.nike.com/a/images/q_auto:eco/t_product_v1/f_auto/dpr_1.0/h_599,c_limit/u_9ddf04c7-2a9a-4d76-add1-d15af8f0263d,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/5bc861d6-73b0-41f4-a39c-cf348536b163/B+NSW+TCH+FLC+FZ+-+PD.png',
+        price: '$130',
+        category: 'Kids Clothing'
+    },
+    {
+        name: "Nike Sportswear Tech Fleece Older Kids' Joggers",
+        description: "Older kids' Tech Fleece joggers.",
+        image_url: 'https://static.nike.com/a/images/q_auto:eco/t_product_v1/f_auto/dpr_1.0/h_599,c_limit/u_9ddf04c7-2a9a-4d76-add1-d15af8f0263d,c_scale,fl_relative,w_1.0,h_1.0,fl_layer_apply/c0ffd9ac-7728-4f14-9f86-d4c27eb36d6d/B+NSW+TCH+FLC+JGGR+-+PD.png',
+        price: '$110',
+        category: 'Kids Clothing'
     }
-];
+]
 
-module.exports = async ({ product_code = '', product_name = '' }) => {
-    const code = typeof product_code === 'string' ? product_code.trim() : '';
-    const productName = typeof product_name === 'string' ? product_name.trim() : '';
-
-    if (!code && !productName) {
+module.exports = async ({ name = '' }) => {
+    if (!name || typeof name !== 'string' || !name.trim()) {
         return {
-            content: [{ type: 'text', text: 'Please provide a product_code or product_name to look up product details.' }]
-        };
+            content: [{ type: 'text', text: 'Please provide the name of the product to retrieve details for.' }]
+        }
     }
 
-    const item = MOCK_DATA.find((p) => {
-        if (code && p.product_code.toLowerCase() === code.toLowerCase()) return true;
-        if (productName && p.name.toLowerCase().includes(productName.toLowerCase())) return true;
-        return false;
-    });
+    const query = name.trim().toLowerCase()
+    let item = MOCK_DATA.find((p) => p.name.toLowerCase() === query)
+    if (!item) {
+        item = MOCK_DATA.find((p) => p.name.toLowerCase().includes(query))
+    }
 
     if (!item) {
-        const term = code || productName;
+        // Not found — return content only (no structuredContent) so the widget shows its empty state.
         return {
-            content: [{ type: 'text', text: `No product found matching "${term}".` }]
-        };
+            content: [{ type: 'text', text: `No product details found for: ${name.trim()}` }]
+        }
     }
 
-    const summary = `${item.name} (${item.category}) — ${item.price}. Available in sizes ${item.sizes.join(', ')} and colors ${item.colors.join(', ')}.`;
+    const summary = `${item.name} — ${item.price}. ${item.description} Category: ${item.category}.`
 
     return {
         content: [{ type: 'text', text: summary }],
@@ -65,19 +89,16 @@ module.exports = async ({ product_code = '', product_name = '' }) => {
             description: item.description,
             price: item.price,
             category: item.category,
-            sizes: item.sizes,
-            colors: item.colors,
             image_url: item.image_url
         }
-    };
-};
+    }
+}
 
 /*
  * TODO: Replace MOCK_DATA with a real API call.
  *
  * Suggested endpoint pattern (update based on actual site API):
- *   GET ${process.env.API_BASE_URL}/products?code=${product_code}
- *   GET ${process.env.API_BASE_URL}/products?q=${product_name}
+ *   GET ${process.env.API_BASE_URL}/products?name=${encodeURIComponent(name)}
  *
  * Environment variables to configure:
  *   API_BASE_URL   Base URL of the website's API
@@ -88,7 +109,7 @@ module.exports = async ({ product_code = '', product_name = '' }) => {
  *
  * Example fetch:
  *   const res = await fetch(
- *     `${process.env.API_BASE_URL}/products?code=${encodeURIComponent(product_code)}`,
+ *     `${process.env.API_BASE_URL}/products?name=${encodeURIComponent(name)}`,
  *     { headers: { 'Authorization': `Bearer ${process.env.API_KEY}` } }
  *   )
  *   if (!res.ok) throw new Error(`API error: ${res.status}`)
